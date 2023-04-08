@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/static/css/styles.css">
   </head>
   <body>
-    <h1>Test analysis of the sample file "organizations-10000.csv" with Pandas</h1>
+    <h1>Test analysis of the sample file <a href="{{ url_for('static', filename='organizations-10000.csv') }}">"organizations-10000.csv"</a> with Pandas</h1>
     <p>Sample file downloaded <a href="https://github.com/datablist/sample-csv-files">from open source on Github</a> </p>
     <h4 class="command">df = pd.read_csv("organizations-10000.csv")</h4>
     {% if data["sample"] %}
@@ -29,7 +29,12 @@
       <h2>7. Duplicates count</h2>
       <h4 class="command">{{ data["duplicates_count"][1]|safe }}</h4>
       <p>{{ data["duplicates_count"][0] }}</p>
-
+      <h2>8. Unique countries count</h2>
+      <h4 class="command">{{ data["unique_countries"][1]|safe }}</h4>
+      {{ data["unique_countries"][0]|safe }}
+      <h2>9. Grouped by country and sum of employees</h2>
+      <h4 class="command">{{ data["grouped_by_country"][1]|safe }}</h4>
+      {{ data["grouped_by_country"][0]|safe }}
     {% endif %}
   </body>
 </html>

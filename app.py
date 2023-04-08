@@ -11,7 +11,7 @@ if not os.path.exists(app.config['UPLOAD_FOLDER']):
 
 @app.route('/', methods=['GET'])
 def upload_file():
-    filepath = "organizations-10000.csv"
+    filepath = "static/organizations-10000.csv"
     data = {}
     if filepath:
         df = pd.read_csv(filepath)
@@ -33,6 +33,13 @@ def upload_file():
         '>> pd.DataFrame(df.isin(["", " "]).sum(), columns=["Empty count"]).reset_index()')
         # 7
         data["duplicates_count"] = (f"{df.duplicated().sum()} (rows)", 'f"{df.duplicated().sum()} (rows)"')
+        # 8
+        country_column = "Country"
+        data["unique_countries"] = (df[country_column].value_counts().reset_index().to_html(classes='res-table'),
+                                    f">> df['{country_column}'].value_counts().reset_index()")
+        # 9
+        data["grouped_by_country"] = (df.groupby("Country")["Number of employees"].sum().sort_values(ascending=False).reset_index().to_html(classes='res-table'),
+        f">> df.groupby('Country')['employees_column'].sum().sort_values(ascending=False).reset_index()")
 
     return render_template('upload.html', data=data)
 
