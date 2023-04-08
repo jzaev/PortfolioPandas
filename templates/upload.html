@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="icon" href="/static/icon.png" type="image/png">
     <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <h1>Test analysis of the sample file <a href="{{ url_for('static', filename='organizations-10000.csv') }}">"organizations-10000.csv"</a> with Pandas</h1>
@@ -31,10 +33,63 @@
       <p>{{ data["duplicates_count"][0] }}</p>
       <h2>8. Unique countries count</h2>
       <h4 class="command">{{ data["unique_countries"][1]|safe }}</h4>
+      <p class="table-toggle">Click the table to expand/collapse</p>
       {{ data["unique_countries"][0]|safe }}
       <h2>9. Grouped by country and sum of employees</h2>
       <h4 class="command">{{ data["grouped_by_country"][1]|safe }}</h4>
+      <p class="table-toggle">Click the table to expand/collapse</p>
       {{ data["grouped_by_country"][0]|safe }}
+      <h2>10. Unique industries count</h2>
+      <h4 class="command">{{ data["unique_industries"][1]|safe }}</h4>
+      <p class="table-toggle">Click the table to expand/collapse</p>
+      {{ data["unique_industries"][0]|safe }}
+      <br><br>
+
+      <h2>Visualization</h2>
+
+
+      <h3>Top 10 countries by number of organizations</h3>
+      <img src="{{ url_for('static', filename='images/top_countries_plotly.png') }}" alt="Top 10 countries">
+
+      <h3>Top 10 industries by number of organizations</h3>
+      <img src="{{ url_for('static', filename='images/top_industries_plotly.png') }}" alt="Top 10 industries">
+
+      <h3>Distribution of number of employees</h3>
+      <img src="{{ url_for('static', filename='images/top15_industries_plotly.png') }}" alt="Top 10 countries colored by industry">
+
     {% endif %}
+    <script>
+      $(document).ready(function() {
+        function toggleTableRows(tableId) {
+          const table = $("#" + tableId);
+          const allRows = table.find("tbody tr");
+          const firstRow = allRows.first();
+          const lastRow = allRows.last();
+
+          allRows.not(firstRow).not(lastRow).toggle();
+        }
+
+        toggleTableRows("table8");
+        toggleTableRows("table9");
+        toggleTableRows("table10");
+
+        $("#table8").on("click", function() {
+          toggleTableRows("table8");
+        });
+
+        $("#table9").on("click", function() {
+          toggleTableRows("table9");
+        });
+
+        $("#table10").on("click", function() {
+          toggleTableRows("table10");
+        });
+
+      });
+    </script>
+
+
+
+
   </body>
 </html>

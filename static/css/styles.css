@@ -42,3 +42,16 @@ body {
 .res-table tr:hover {
   background-color: #b2bec3;
 }
+
+.show-more {
+  cursor: pointer;
+}
+
+.show-more::after {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.table-toggle{
+  font-size: 0.8rem;
+}
