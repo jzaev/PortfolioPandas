@@ -7,46 +7,88 @@
   </head>
   <body>
     <h1>Test analysis of the sample file <a href="{{ url_for('static', filename='complete.csv') }}">"complete.csv"</a> with Pandas</h1>
-    <p>Sample file downloaded <a href=https://www.kaggle.com/datasets/imdevskp/nobel-prize>from open source on www.kaggle.com</a> </p>
+    <p>The sample file is downloaded <a href=https://www.kaggle.com/datasets/imdevskp/nobel-prize>from open source on www.kaggle.com</a> nd contains data on Nobel Prizes awarded up to 2019.</p>
     <h4 class="command">df = pd.read_csv("complete.csv")</h4>
     {% if data["sample"] %}
+      <!-- Display sample data -->
       <h2>1. Sample data</h2>
       <h4 class="command">{{ data["sample"][1]|safe }}</h4>
       {{ data["sample"][0]|safe }}
+
+      <!-- Display shape of DataFrame -->
       <h2>2. Shape</h2>
       <h4 class="command">{{ data["shape"][1]|safe }}</h4>
       <p>Rows: {{ data["shape"][0][0] }}, Columns: {{ data["shape"][0][1] }}</p>
+
+      <!-- Display columns of DataFrame -->
       <h2>3. Columns</h2>
       <h4 class="command"> {{ data["columns"][1]|safe }}</h4>
       <p class="table-toggle">Click the table to expand/collapse</p>
       {{ data["columns"][0]|safe }}
+
+      <!-- Display DataFrame description -->
       <h2>4. Describe</h2>
       <h4 class="command">{{ data["describe"][1]|safe }}</h4>
       {{ data["describe"][0]|safe }}
+
+      <!-- Display NaN count -->
       <h2>5. Check for NaN count</h2>
       <h4 class="command">{{ data["nan_count"][1]|safe }}</h4>
       <p class="table-toggle">Click the table to expand/collapse</p>
       {{ data["nan_count"][0]|safe }}
+
+      <!-- Display empty count -->
       <h2>6. Empty count</h2>
       <h4 class="command">{{ data["empty_count"][1]|safe }}</h4>
       <p class="table-toggle">Click the table to expand/collapse</p>
       {{ data["empty_count"][0]|safe }}
+
+      <!-- Display duplicates count -->
       <h2>7. Duplicates count</h2>
       <h4 class="command">{{ data["duplicates_count"][1]|safe }}</h4>
       <p>{{ data["duplicates_count"][0] }}</p>
+
+      <!-- Display data after dropping unnecessary columns -->
       <h2>8. Sample data after dropping unnecessary columns</h2>
       <h4 class="command">{{ data["dropped_columns"][1]|safe }}</h4>
       {{ data["dropped_columns"][0]|safe }}
-      <h2>9. Check for NaN count</h2>
+
+      <!-- Display NaN count after dropping unnecessary columns -->
+      <h2>9. Check for NaN count after dropping unnecessary columns</h2>
       <h4 class="command">{{ data["nan_count2"][1]|safe }}</h4>
       {{ data["nan_count2"][0]|safe }}
+
+      <!-- Display rows with at least one NaN value -->
       <h2>10. Rows with at least one NaN value</h2>
       <h4 class="command">{{ data["rows_with_nan"][1]|safe }}</h4>
       <p class="table-toggle">Click the table to expand/collapse</p>
       {{ data["rows_with_nan"][0]|safe }}
 
+      <h2>11. People who received the award more than once</h2>
+      <h4 class="command">{{ data["multiple_awards"][1]|safe }}</h4>
+      {{ data["multiple_awards"][0]|safe }}
 
-      <!-- Здесь будут новые блоки кода для отображения результатов анализа нового файла CSV -->
+      <!-- ... -->
+      <h2>12. Number of awards by country more than once</h2>
+      <h4 class="command">{{ data["awards_by_country"][1]|safe }}</h4>
+      <p class="table-toggle">Click the table to expand/collapse</p>
+      {{ data["awards_by_country"][0]|safe }}
+      <!-- ... -->
+      <h2>13. Awards by category</h2>
+      <h4 class="command">{{ data["awards_by_category"][1]|safe }}</h4>
+      {{ data["awards_by_category"][0]|safe }}
+
+      <h2>14. Top 15 countries by year</h2>
+      <iframe src="{{ url_for('static', filename='scatter_chart.html') }}" width="100%" height="600px" style="border:none;"></iframe>
+
+      <!-- Display pie charts -->
+      <h2>15. Pie Charts: Laureate Types, Gender Distribution, and Category Distribution</h2>
+      <iframe src="{{ url_for('static', filename='pie_charts.html') }}" width="100%" height="600px" style="border:none;"></iframe>
+
+      <h2>16. Number of awards by continent</h2>
+      <iframe src="{{ url_for('static', filename='continent_country_bar_chart.html') }}" width="100%" height="600px" style="border:none;"></iframe>
+
+      <!-- Here will be new code blocks for displaying the results of the analysis of the new CSV file -->
     {% endif %}
     <script>
       $(document).ready(function() {

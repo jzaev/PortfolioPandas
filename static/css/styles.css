@@ -10,7 +10,7 @@ body {
   padding: 10px;
   margin: 10px;
   font-weight: normal;
-  width: 50%;
+  width: 100%;
 }
 
 .res-table {
@@ -54,4 +54,20 @@ body {
 
 .table-toggle{
   font-size: 0.8rem;
+}
+
+.res-table tbody tr td {
+  max-height: 2.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.res-table tbody tr td:hover {
+  max-height: none;
+  overflow: visible;
+  white-space: normal;
+  background-color: #f1f1f1;
+  position: relative;
+  z-index: 1;
 }
