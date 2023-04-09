@@ -11,7 +11,7 @@ This project is a web application for analyzing and visualizing data on Nobel Pr
 
 ## Installation
 
-1. Clone the repository or download the source code.
+* Clone the repository or download the source code.
 
-2. Create a virtual environment for the project:
+* Create a virtual environment for the project:
 
