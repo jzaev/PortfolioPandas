@@ -6,9 +6,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
-    <h1>Test analysis of the sample file <a href="{{ url_for('static', filename='organizations-10000.csv') }}">"organizations-10000.csv"</a> with Pandas</h1>
-    <p>Sample file downloaded <a href="https://github.com/datablist/sample-csv-files">from open source on Github</a> </p>
-    <h4 class="command">df = pd.read_csv("organizations-10000.csv")</h4>
+    <h1>Test analysis of the sample file <a href="{{ url_for('static', filename='complete.csv') }}">"complete.csv"</a> with Pandas</h1>
+    <p>Sample file downloaded <a href=https://www.kaggle.com/datasets/imdevskp/nobel-prize>from open source on www.kaggle.com</a> </p>
+    <h4 class="command">df = pd.read_csv("complete.csv")</h4>
     {% if data["sample"] %}
       <h2>1. Sample data</h2>
       <h4 class="command">{{ data["sample"][1]|safe }}</h4>
@@ -18,50 +18,39 @@
       <p>Rows: {{ data["shape"][0][0] }}, Columns: {{ data["shape"][0][1] }}</p>
       <h2>3. Columns</h2>
       <h4 class="command"> {{ data["columns"][1]|safe }}</h4>
+      <p class="table-toggle">Click the table to expand/collapse</p>
       {{ data["columns"][0]|safe }}
       <h2>4. Describe</h2>
       <h4 class="command">{{ data["describe"][1]|safe }}</h4>
       {{ data["describe"][0]|safe }}
-      <h2>5. NaN count</h2>
+      <h2>5. Check for NaN count</h2>
       <h4 class="command">{{ data["nan_count"][1]|safe }}</h4>
+      <p class="table-toggle">Click the table to expand/collapse</p>
       {{ data["nan_count"][0]|safe }}
       <h2>6. Empty count</h2>
       <h4 class="command">{{ data["empty_count"][1]|safe }}</h4>
+      <p class="table-toggle">Click the table to expand/collapse</p>
       {{ data["empty_count"][0]|safe }}
       <h2>7. Duplicates count</h2>
       <h4 class="command">{{ data["duplicates_count"][1]|safe }}</h4>
       <p>{{ data["duplicates_count"][0] }}</p>
-      <h2>8. Unique countries count</h2>
-      <h4 class="command">{{ data["unique_countries"][1]|safe }}</h4>
+      <h2>8. Sample data after dropping unnecessary columns</h2>
+      <h4 class="command">{{ data["dropped_columns"][1]|safe }}</h4>
+      {{ data["dropped_columns"][0]|safe }}
+      <h2>9. Check for NaN count</h2>
+      <h4 class="command">{{ data["nan_count2"][1]|safe }}</h4>
+      {{ data["nan_count2"][0]|safe }}
+      <h2>10. Rows with at least one NaN value</h2>
+      <h4 class="command">{{ data["rows_with_nan"][1]|safe }}</h4>
       <p class="table-toggle">Click the table to expand/collapse</p>
-      {{ data["unique_countries"][0]|safe }}
-      <h2>9. Grouped by country and sum of employees</h2>
-      <h4 class="command">{{ data["grouped_by_country"][1]|safe }}</h4>
-      <p class="table-toggle">Click the table to expand/collapse</p>
-      {{ data["grouped_by_country"][0]|safe }}
-      <h2>10. Unique industries count</h2>
-      <h4 class="command">{{ data["unique_industries"][1]|safe }}</h4>
-      <p class="table-toggle">Click the table to expand/collapse</p>
-      {{ data["unique_industries"][0]|safe }}
-      <br><br>
-
-      <h2>Visualization</h2>
+      {{ data["rows_with_nan"][0]|safe }}
 
 
-      <h3>Top 10 countries by number of organizations</h3>
-      <img src="{{ url_for('static', filename='images/top_countries_plotly.png') }}" alt="Top 10 countries">
-
-      <h3>Top 10 industries by number of organizations</h3>
-      <img src="{{ url_for('static', filename='images/top_industries_plotly.png') }}" alt="Top 10 industries">
-
-      <h3>Distribution of number of employees</h3>
-      <img src="{{ url_for('static', filename='images/top15_industries_plotly.png') }}" alt="Top 10 countries colored by industry">
-
+      <!-- Здесь будут новые блоки кода для отображения результатов анализа нового файла CSV -->
     {% endif %}
     <script>
       $(document).ready(function() {
-        function toggleTableRows(tableId) {
-          const table = $("#" + tableId);
+        function toggleTableRows(table) {
           const allRows = table.find("tbody tr");
           const firstRow = allRows.first();
           const lastRow = allRows.last();
@@ -69,27 +58,14 @@
           allRows.not(firstRow).not(lastRow).toggle();
         }
 
-        toggleTableRows("table8");
-        toggleTableRows("table9");
-        toggleTableRows("table10");
-
-        $("#table8").on("click", function() {
-          toggleTableRows("table8");
+        $(".toggle-table").each(function() {
+          toggleTableRows($(this));
         });
 
-        $("#table9").on("click", function() {
-          toggleTableRows("table9");
+        $(".toggle-table").on("click", function() {
+          toggleTableRows($(this));
         });
-
-        $("#table10").on("click", function() {
-          toggleTableRows("table10");
-        });
-
       });
     </script>
-
-
-
-
   </body>
 </html>

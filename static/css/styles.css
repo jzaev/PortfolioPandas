@@ -27,12 +27,12 @@ body {
 }
 
 .res-table tr {
-  height: 2rem;
+  height: 1.5rem;
 }
 
 .res-table td {
   border: 1px solid #95afc0;
-  padding: 0.5rem;
+  padding: 0.2rem;
 }
 
 .res-table tr:nth-child(even) {
