@@ -1,4 +1,5 @@
 # Nobel Prize Winners Data Analysis
+## This task can be considered as a portfolio work.
 
 This version is made for practicing programming in Python and for a professional portfolio by Yury Zaev. It does not represent any commercial interest and is not a complete solution.
 
